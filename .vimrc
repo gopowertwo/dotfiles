@@ -10,15 +10,18 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+let g:gruvbox_italic=0
+set t_Co=256
 set background=dark
 syntax enable " enable syntax processing
-set t_Co=256
 colorscheme gruvbox
 
 set tabstop=4 " number of visual spaces per TAB
@@ -28,8 +31,10 @@ set noet ci pi sts=0 sw=4 ts=4
 
 set number " show line numbers
 set showcmd " show command in bottom bar
+set autoread " automatically reload unchanged files
 
-"set cursorline          " highlight current line
+
+set cursorline          " highlight current line
 " Set cursorline colors
 " highlight CursorLine ctermbg=blue
 " Set color of number column on cursorline
@@ -50,11 +55,15 @@ nnoremap <C-k> <C-w><c-k>
 nnoremap <C-l> <C-w><c-l>
 nnoremap <C-h> <C-w><c-h>
 
+set laststatus=2
+set statusline=%f
+
+filetype plugin indent on
+au FileType py set autoindent
+au FileType py set smartindent
+
 set splitbelow
 set splitright
-
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
 
 " move vertically by visual line
 nnoremap j gj
@@ -80,6 +89,10 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " save session
 nnoremap <leader>s :mksession<CR>
+
+" turn off search highlight
+" nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader><space> :noh<CR>
 
 " open ag.vim
 nnoremap <leader>a :Ag

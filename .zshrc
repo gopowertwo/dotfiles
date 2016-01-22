@@ -94,6 +94,7 @@ alias gus="git up-sub"
 alias devbase="git up-sub B_DevBase"
 alias ci="git up-sub B_CI"
 alias ft="git up-sub B_FeatureTest"
+alias master="git up-sub master"
 
 alias reload=". ~/.zshrc"
 
