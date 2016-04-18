@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/gzlatkov/.oh-my-zsh
+export ZSH=/Users/gz/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -45,11 +45,11 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git brew pip python)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/gzlatkov/git/arcanist/bin/"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/mysql/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -76,41 +76,32 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias subl="~/Downloads/sublime_text_3/sublime_text"
+alias zshrc="vim ~/.zshrc"
+alias vimrc="vim ~/.vimrc"
+#alias ohmyzsh="vim ~/.oh-my-zsh"
 
 alias coverage="python -m coverage"
-#alias gitcov="coverage run --source=`git diff --name-only | tr '\n' ','` algos/models/base_icehockey.py > /dev/null 2>&1; coverage report -m"
-
-gitcov() { coverage run --source=`git diff --name-only | tr '\n' ','` "$@" > /dev/null; coverage report -m}
-
-alias sbci="timplus sportsbook_ci@db1"
-alias sbft="timplus sportsbook_ft@db1"
-alias sbtb="timplus sportsbook_tbtest@ora11"
-
-alias gus="git up-sub"
-alias devbase="git up-sub B_DevBase"
-alias ci="git up-sub B_CI"
-alias ft="git up-sub B_FeatureTest"
-alias master="git up-sub master"
-
 alias reload=". ~/.zshrc"
+alias v="/Applications/MacVim.app/Contents/MacOS/Vim"
+alias activate="source venv/bin/activate"
 
-alias start="cd /home/gzlatkov/git/PROJ-MultiOp/sportsbook/apps/admin/; gapp sb_admin.cfg"
-alias startf="cd /home/gzlatkov/git/PROJ-MultiOp/sportsbook/apps/admin/; GENEITY_ENV=FEATURETEST gapp sb_admin.cfg"
-alias startmgr="cd /home/gzlatkov/git/PROJ-MultiOp/sportsbook/apps/bip_mgr/;./sb_bip_mgr.sh"
+alias -s py="/Applications/MacVim.app/Contents/MacOS/Vim"
+alias -s log="less -MN"
+alias -s html="firefox"
 
 # setxkbmap -option caps:swapescape
-setxkbmap -option grp:alt_shift_toggle us,bg
+# setxkbmap -option grp:alt_shift_toggle us,bg
 
 # optionally set DEFAULT_USER in ~/.zshrc to your regular username to hide the “user@hostname” info when you’re logged in as yourself on your local machine.
-DEFAULT_USER=gzlatkov
-
-xmodmap ~/.Xmodmap
-
-. ~/.geneity_paths
-mopath
+DEFAULT_USER=gz
 
 export PYTHONDONTWRITEBYTECODE=1
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+
+LESSPIPE=`which src-hilite-lesspipe.sh`
+export LESSOPEN="| ${LESSPIPE} %s"
+export LESS='-R'
+
+# Add env.sh
+. ~/.env.sh

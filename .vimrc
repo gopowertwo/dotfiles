@@ -9,10 +9,12 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'morhetz/gruvbox'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
+Plugin 'terryma/vim-expand-region'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -24,22 +26,22 @@ set background=dark
 syntax enable " enable syntax processing
 colorscheme gruvbox
 
+set spell spelllang=en_us
+
+set makeprg=python\ %
+set autowrite
+
+
 set tabstop=4 " number of visual spaces per TAB
 set softtabstop=4 " number of spaces in tab when editing
-set noet ci pi sts=0 sw=4 ts=4
-" set expandtab " tabs are spaces
+set expandtab " tabs are spaces
+set shiftwidth=4 " number of space characters on identation
 
 set number " show line numbers
 set showcmd " show command in bottom bar
 set autoread " automatically reload unchanged files
 
-
-set cursorline          " highlight current line
-" Set cursorline colors
-" highlight CursorLine ctermbg=blue
-" Set color of number column on cursorline
-" highlight CursorLineNR ctermbg=235 ctermfg=white
-" hi cursorlinenr ctermfg=red
+set cursorline " highlight current line
 
 filetype indent on " load filetype-specific indent files
 set wildmenu
@@ -48,6 +50,8 @@ set showmatch
 
 set incsearch
 set hlsearch
+
+set clipboard=unnamedplus
 
 " Split config
 nnoremap <C-j> <C-w><c-j>
@@ -77,10 +81,23 @@ nnoremap E $
 nnoremap $ <nop>
 nnoremap ^ <nop>
 
-let mapleader="," " leader is comma
+let mapleader="\<Space>" " leader
 
-" toggle gundo
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>o :CtrlP<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
+
+nmap <leader><leader> V
+
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
@@ -91,17 +108,21 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>s :mksession<CR>
 
 " turn off search highlight
-" nnoremap <leader><space> :nohlsearch<CR>
-nnoremap <leader><space> :noh<CR>
+nnoremap <leader>, :noh<CR>
+
+" remove trailing whitespaces
+nnoremap <leader>. :%s/\s\+$//<CR>
 
 " open ag.vim
-nnoremap <leader>a :Ag
+" nnoremap <leader>a :Ag
 
 " CtrlP settings
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
 " Breaking the habbit
 noremap <Up> <NOP>
